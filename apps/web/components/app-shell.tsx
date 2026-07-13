@@ -26,7 +26,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       );
     };
     pollNotifications();
-    setInterval(pollNotifications, 5000);
+    const intervalId = setInterval(pollNotifications, 5000);
+    return () => clearInterval(intervalId);
   }, []);
   return (
     <div className="min-h-screen md:grid md:grid-cols-[240px_1fr]">
