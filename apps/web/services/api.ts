@@ -1,4 +1,4 @@
-const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api/v1';
+const baseUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
 type ApiResponse<T> = { success: boolean; message: string; data: T };
 export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
