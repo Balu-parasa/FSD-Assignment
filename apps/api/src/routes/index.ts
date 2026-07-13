@@ -73,6 +73,8 @@ router.post(
   requireTaskAccess,
   asyncHandler(comments.createComment),
 );
+router.patch('/comments/:commentId', ...protect(comments.updateComment));
+router.delete('/comments/:commentId', ...protect(comments.deleteComment));
 router.get('/dashboard', ...protect(dashboard.dashboard));
 router.get('/notifications', ...protect(notifications.listNotifications));
 router.patch('/notifications/:notificationId/read', ...protect(notifications.readNotification));

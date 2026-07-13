@@ -48,7 +48,7 @@ export const getTask = async (req: Request, res: Response) => {
   return task ? respond(res, 200, 'Task retrieved', task) : respond(res, 404, 'Task not found');
 };
 export const updateTask = async (req: Request, res: Response) => {
-  const values = req.body as Record<string, unknown>;
+  const values = taskSchema.partial().parse(req.body);
   const task = await TaskModel.findByIdAndUpdate(req.params.taskId, values, {
     new: true,
     runValidators: true,

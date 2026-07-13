@@ -67,10 +67,9 @@ export default function ProjectsPage() {
               </span>
               <h2 className="font-semibold">{project.name}</h2>
             </div>
-            <p
-              className="mt-3 text-sm text-slate-500"
-              dangerouslySetInnerHTML={{ __html: project.description || 'No description yet.' }}
-            />
+            <p className="mt-3 text-sm text-slate-500">
+              {project.description || 'No description yet.'}
+            </p>
           </Card>
         ))}
       </div>
