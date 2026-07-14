@@ -15,7 +15,6 @@ export default function DashboardPage() {
   const { data, isLoading } = useQuery({
     queryKey: ['dashboard'],
     queryFn: () => api<Dashboard>('/dashboard'),
-    staleTime: Infinity,
   });
   if (isLoading) return <p className="text-sm text-slate-500">Loading your work…</p>;
   const stats = [
