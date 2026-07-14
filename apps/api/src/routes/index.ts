@@ -1,6 +1,10 @@
 import { Router, type Request, type Response } from 'express';
 import { requireAuth } from '../middleware/auth.js';
-import { requireProjectAccess, requireTaskAccess } from '../middleware/project-access.js';
+import {
+  requireProjectAccess,
+  requireTaskAccess,
+  requireCommentAccess,
+} from '../middleware/project-access.js';
 import * as auth from '../controllers/auth-controller.js';
 import * as projects from '../controllers/project-controller.js';
 import * as tasks from '../controllers/task-controller.js';
@@ -58,7 +62,7 @@ router.post(
   requireProjectAccess,
   asyncHandler(tasks.createTask),
 );
-router.get('/tasks/:taskId', ...protect(tasks.getTask));
+router.get('/tasks/:taskId', requireAuth, requireTaskAccess, asyncHandler(tasks.getTask));
 router.patch('/tasks/:taskId', requireAuth, requireTaskAccess, asyncHandler(tasks.updateTask));
 router.delete('/tasks/:taskId', requireAuth, requireTaskAccess, asyncHandler(tasks.deleteTask));
 router.get(
@@ -73,8 +77,18 @@ router.post(
   requireTaskAccess,
   asyncHandler(comments.createComment),
 );
-router.patch('/comments/:commentId', ...protect(comments.updateComment));
-router.delete('/comments/:commentId', ...protect(comments.deleteComment));
+router.patch(
+  '/comments/:commentId',
+  requireAuth,
+  requireCommentAccess,
+  asyncHandler(comments.updateComment),
+);
+router.delete(
+  '/comments/:commentId',
+  requireAuth,
+  requireCommentAccess,
+  asyncHandler(comments.deleteComment),
+);
 router.get('/dashboard', ...protect(dashboard.dashboard));
 router.get('/notifications', ...protect(notifications.listNotifications));
 router.patch('/notifications/:notificationId/read', ...protect(notifications.readNotification));
