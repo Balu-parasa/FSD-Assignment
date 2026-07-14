@@ -20,7 +20,6 @@ const userSchema = new Schema(
     },
   },
 );
-userSchema.index({ email: 1 }, { unique: true });
 export type User = InferSchemaType<typeof userSchema>;
 export const UserModel = model('User', userSchema);
 export const hashPassword = (password: string) => bcrypt.hash(password, 12);

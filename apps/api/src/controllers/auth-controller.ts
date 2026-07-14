@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express';
+import { z } from 'zod';
 import { UserModel, hashPassword, matchesPassword } from '../models/user.js';
 import { loginSchema, registerSchema } from '../validators/schemas.js';
 import { respond } from '../utils/api.js';
@@ -64,4 +65,3 @@ export const updateProfile = async (req: Request, res: Response) => {
   await req.user!.save();
   return respond(res, 200, 'Profile updated', req.user);
 };
-import { z } from 'zod';
