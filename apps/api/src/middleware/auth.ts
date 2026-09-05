@@ -7,8 +7,7 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
     const token = req.header('authorization')?.replace(/^Bearer\s+/i, '');
     if (!token) return respond(res, 401, 'Authentication required');
     const payload = verifyAccessToken(token);
-    const user = await UserModel.findById(payload.sub);
-    if (!user) return respond(res, 401, 'Session is no longer valid');
+   
     req.user = user;
     next();
   } catch {
