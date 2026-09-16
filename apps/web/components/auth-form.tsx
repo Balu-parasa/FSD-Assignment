@@ -66,21 +66,7 @@ export function AuthForm({ mode }: { mode: 'login' | 'register' }) {
           <span className="text-xs text-red-600">{form.formState.errors.password.message}</span>
         )}
       </label>
-      {form.formState.errors.root && (
-        <p className="text-sm text-red-600">{form.formState.errors.root.message}</p>
-      )}
-      <Button className="w-full" type="submit" disabled={form.formState.isSubmitting}>
-        {form.formState.isSubmitting
-          ? 'Please wait…'
-          : mode === 'login'
-            ? 'Sign in'
-            : 'Create account'}
-      </Button>
-      {mode === 'login' && (
-        <Link className="block text-center text-sm text-primary" href="/forgot-password">
-          Forgot your password?
-        </Link>
-      )}
+     
     </form>
   );
 }
