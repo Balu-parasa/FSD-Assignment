@@ -10,5 +10,7 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
       ...init.headers,
     },
   });
-  
+ const body = (await response.json()) as ApiResponse<T>;
+  if (!response.ok) throw new Error(body.message);
+  return body.data; 
 }
